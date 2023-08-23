@@ -1,0 +1,335 @@
+use("db_mongo_citas");
+db.createCollection("usuarios", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [
+                "usu_nombre",
+                "usu_segdo_nombre",
+                "usu_primer_apellido",
+                "usu_segdo_apellido",
+                "usu_telefono",
+                "usu_direccion",
+                "usu_email",
+                "usu_tipodoc",
+                "usu_genero",
+            ],
+            properties: {
+                usu_id: {
+                    bsonType: "int",
+                    description: "Identificador del usuario",
+                },
+                usu_nombre: {
+                    bsonType: "string",
+                    description: "Nombre del usuario",
+                },
+                usu_segdo_nombre: {
+                    bsonType: "string",
+                    description: "Segundo nombre del usuario",
+                },
+                usu_primer_apellido: {
+                    bsonType: "string",
+                    description: "Primer apellido del usuario",
+                },
+                usu_segdo_apellido: {
+                    bsonType: "string",
+                    description: "Segundo apellido del usuario",
+                },
+                usu_telefono: {
+                    bsonType: "string",
+                    description: "Telefono del usuario",
+                },
+                usu_direccion: {
+                    bsonType: "string",
+                    description: "Direccion del usuario",
+                },
+                usu_email: {
+                    bsonType: "string",
+                    description: "Correo electronico del usuario",
+                },
+                usu_tipodoc: {
+                    bsonType: "int",
+                    description: "Tipo de documento del usuario",
+                },
+                usu_genero: {
+                    bsonType: "int",
+                    description: "Genero del usuario",
+                },
+            },
+        },
+    },
+});
+
+db.createCollection("medicos", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [
+                "med_nroMatriculaProfesional",
+                "med_nombreCompleto",
+                "med_consultorio",
+                "med_especialidad",
+            ],
+            properties: {
+                med_nroMatriculaProfesional: {
+                    bsonType: "int",
+                    description: "Numero de matricula profesional del medico",
+                },
+                med_nombreCompleto: {
+                    bsonType: "string",
+                    description: "Nombre completo del medico",
+                },
+                med_consultorio: {
+                    bsonType: "int",
+                    description: "Consultorio del medico",
+                },
+                med_especialidad: {
+                    bsonType: "int",
+                    description: "Especialidad del medico",
+                },
+            },
+        },
+    },
+});
+
+db.createCollection("citas", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: [
+                "cit_fecha",
+                "cit_estadoCita",
+                "cit_medico",
+                "cit_datosUsuario",
+            ],
+            properties: {
+                cit_id: {
+                    bsonType: "int",
+                    description: "Identificador de la cita",
+                },
+                cit_fecha: {
+                    bsonType: "date",
+                    description: "Fecha de la cita",
+                },
+                cit_estadoCita: {
+                    bsonType: "int",
+                    description: "Estado de la cita",
+                },
+                cit_medico: {
+                    bsonType: "int",
+                    description: "Medico de la cita",
+                },
+                cit_datosUsuario: {
+                    bsonType: "int",
+                    description: "Datos del usuario de la cita",
+                },
+            },
+        },
+    },
+});
+
+db.createCollection("especialidades", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["esp_nombre"],
+            properties: {
+                esp_id: {
+                    bsonType: "int",
+                    description: "Identificador de la especialidad",
+                },
+                esp_nombre: {
+                    bsonType: "string",
+                    description: "Nombre de la especialidad",
+                },
+            },
+        },
+    },
+});
+db.createCollection("consultorios", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["cons_nombre"],
+            properties: {
+                cons_id: {
+                    bsonType: "int",
+                    description: "Identificador del consultorio",
+                },
+                cons_nombre: {
+                    bsonType: "string",
+                    description: "Nombre del consultorio",
+                },
+            },
+        },
+    },
+});
+
+db.usuarios.insertMany([
+    {
+        usu_id: 1,
+        usu_nombre: "Juan",
+        usu_segdo_nombre: "Pablo",
+        usu_primer_apellido: "Gomez",
+        usu_segdo_apellido: "Rodriguez",
+        usu_telefono: "123456789",
+        usu_direccion: "Calle 123, Ciudad",
+        usu_email: "juan@example.com",
+        usu_tipodoc: 1,
+        usu_genero: 1,
+    },
+    {
+        usu_id: 2,
+        usu_nombre: "Maria",
+        usu_segdo_nombre: "",
+        usu_primer_apellido: "Lopez",
+        usu_segdo_apellido: "Martinez",
+        usu_telefono: "987654321",
+        usu_direccion: "Avenida ABC, Pueblo",
+        usu_email: "maria@example.com",
+        usu_tipodoc: 2,
+        usu_genero: 2,
+    },
+    {
+        usu_id: 3,
+        usu_nombre: "Carlos",
+        usu_segdo_nombre: "Alberto",
+        usu_primer_apellido: "Vargas",
+        usu_segdo_apellido: "Ramirez",
+        usu_telefono: "55555555",
+        usu_direccion: "Calle XYZ, Ciudad",
+        usu_email: "carlos@example.com",
+        usu_tipodoc: 1,
+        usu_genero: 1,
+    },
+    {
+        usu_id: 4,
+        usu_nombre: "Ana",
+        usu_segdo_nombre: "Lucia",
+        usu_primer_apellido: "Perez",
+        usu_segdo_apellido: "Gutierrez",
+        usu_telefono: "88888888",
+        usu_direccion: "Avenida 123, Pueblo",
+        usu_email: "ana@example.com",
+        usu_tipodoc: 2,
+        usu_genero: 2,
+    },
+    {
+        usu_id: 5,
+        usu_nombre: "Luis",
+        usu_segdo_nombre: "Fernando",
+        usu_primer_apellido: "Torres",
+        usu_segdo_apellido: "Gomez",
+        usu_telefono: "77777777",
+        usu_direccion: "Calle ABC, Ciudad",
+        usu_email: "luis@example.com",
+        usu_tipodoc: 1,
+        usu_genero: 1,
+    },
+]);
+
+db.medicos.insertMany([
+    {
+        med_nroMatriculaProfesional: 12345,
+        med_nombreCompleto: "Dr. Roberto Fernandez",
+        med_consultorio: 101,
+        med_especialidad: 1,
+    },
+    {
+        med_nroMatriculaProfesional: 54321,
+        med_nombreCompleto: "Dra. Ana Ramirez",
+        med_consultorio: 202,
+        med_especialidad: 2,
+    },
+    {
+        med_nroMatriculaProfesional: 98765,
+        med_nombreCompleto: "Dr. Javier Martinez",
+        med_consultorio: 303,
+        med_especialidad: 1,
+    },
+    {
+        med_nroMatriculaProfesional: 67890,
+        med_nombreCompleto: "Dra. Maria Gomez",
+        med_consultorio: 404,
+        med_especialidad: 3,
+    },
+    {
+        med_nroMatriculaProfesional: 45678,
+        med_nombreCompleto: "Dr. Juan Rodriguez",
+        med_consultorio: 505,
+        med_especialidad: 4,
+    },
+]);
+
+db.citas.insertMany([
+    {
+        cit_id: 1,
+        cit_fecha: new Date("2023-08-25"),
+        cit_estadoCita: 1,
+        cit_medico: 12345,
+        cit_datosUsuario: 1,
+    },
+    {
+        cit_id: 2,
+        cit_fecha: new Date("2023-09-05"),
+        cit_estadoCita: 2,
+        cit_medico: 54321,
+        cit_datosUsuario: 2,
+    },
+    {
+        cit_id: 3,
+        cit_fecha: new Date("2023-09-10"),
+        cit_estadoCita: 1,
+        cit_medico: 98765,
+        cit_datosUsuario: 3,
+    },
+    {
+        cit_id: 4,
+        cit_fecha: new Date("2023-09-15"),
+        cit_estadoCita: 3,
+        cit_medico: 67890,
+        cit_datosUsuario: 4,
+    },
+    {
+        cit_id: 5,
+        cit_fecha: new Date("2023-09-20"),
+        cit_estadoCita: 2,
+        cit_medico: 45678,
+        cit_datosUsuario: 5,
+    },
+]);
+
+db.especialidades.insertMany([
+    { esp_nombre: "Cardiología", esp_id: 1 },
+    { esp_nombre: "Dermatología", esp_id: 2 },
+    { esp_nombre: "Pediatría", esp_id: 3 },
+    { esp_nombre: "Oftalmología", esp_id: 4 },
+    { esp_nombre: "Ginecología", esp_id: 5 },
+]);
+
+db.consultorios.insertMany([
+    { cons_nombre: "Consultorio A", cons_id: 101 },
+    { cons_nombre: "Consultorio B", cons_id: 202 },
+    { cons_nombre: "Consultorio C", cons_id: 303 },
+    { cons_nombre: "Consultorio D", cons_id: 404 },
+    { cons_nombre: "Consultorio E", cons_id: 505 },
+]);
+
+db.createCollection("roles", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["rol_nombre"],
+            properties: {
+                rol_id: {
+                    bsonType: "int",
+                    description: "Identificador del rol",
+                },
+                rol_nombre: {
+                    bsonType: "string",
+                    description: "Nombre del rol",
+                },
+            },
+        },
+    },
+});
