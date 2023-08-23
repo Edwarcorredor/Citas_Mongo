@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "express-rate-limit": "6.9.0",
+    "jose": "4.14.4",
+    "mongodb": "5.8.1",
+    "passport": "0.6.0",
+    "passport-http-bearer": "1.0.1",
+    "zod": "3.22.2"
+  },
+  "name": "citas_mongo",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./src/app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Edwar Corredor",
+  "license": "ISC",
+  "description": ""
+}
