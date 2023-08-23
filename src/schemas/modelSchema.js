@@ -1,6 +1,9 @@
 import { z } from "zod";
 
-const pacientesSchema = z.object({
+/**
+ **Se crea la validación para los datos de los usuarios 
+*/
+const pacienteSchema = z.object({
     direccion: z.string({required_error: "La direccion es requerida"}).min(1).max(100),
     email: z.string({required_error: "El email es requerido"}).email(),
     genero: z.number({required_error: "El genero es requerido"}).int().min(1).max(2),
@@ -12,22 +15,36 @@ const pacientesSchema = z.object({
     tipoDoc: z.number({required_error: "El tipoDoc es requerido"}).int().min(1).max(3)
 });
 
+/**
+ **Validación para los tipos de usuario 
+*/
 const tipoUsuarioSchema = z.object({
     email: z.string({required_error: "El email es requerido"}).email(),
 });
+
+/**
+ ** Validación para tipo de medico  
+*/
 const tipoMedicoSchema = z.object({
     matricula_profesional: z.number({required_error: "La matricula_profesional es requerida"}).int().min(1).max(10),
 });
 
-const funSchemaLogin = (tipo) => tipo == 1 ? tipoUsuarioSchema : tipoMedicoSchema;
 
+/**
+ ** Funcion para elegir el tipo de usuario o de medico 
+*/
+const schemaLogin = (tipo) => tipo == 1 ? tipoUsuarioSchema : tipoMedicoSchema;
+
+/**
+ ** Validación para el rol 
+*/
 const rolSchema = z.object({
     rol: z.number({required_error: "El rol es requerido"}).int().min(1).max(2),
 });
 
 
 export {
-    pacientesSchema,
-    funSchemaLogin,
+    pacienteSchema,
+    schemaLogin,
     rolSchema
 }
